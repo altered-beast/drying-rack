@@ -6,4 +6,4 @@ app = Flask(__name__)
 
 @app.route('/')
 def base():
-    return render_template("html/main.html")
+    return render_template("main.html")
