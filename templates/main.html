@@ -5,15 +5,24 @@
 
 
 </head>
-    {% macro collum() %}
-    <div> trans rights </div>
+<style>
+  div {
+    float: left;
+   }
+</style>
+
+    {% macro collum(size ='25%',contents ='translefts') %}
+    <div style="width:{{size}}; background-color:red;  height:70% "> {{ contents }} </div>
     {%- endmacro -%}
 
 <body>
-{%set collums = 5 %}
-{% for i in range(collums) %}
- {{ collum() }}
-{% endfor %}
+<div style="width:100%; height:100%" >
 
+
+{{ collum( size = '15%' contents = 'trans') }}
+{{ collum('15%') }}
+{{ collum() }}
+{{ collum() }}
+</div>
 </body>
 </html>
