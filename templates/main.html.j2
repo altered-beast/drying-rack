@@ -3,27 +3,23 @@
 <head>
     <title>drying rack</title>
 
-    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/main.css" src = "{{- url_for('static', filename = 'main.css') -}}">
 
 </head>
 
 
-    {% macro Collum(size ='25%',contents ='translefts' , class = 'collum') %}
-    <div style="width:{{size}}; background-color:red;  height:70%; "class={{class}}> {{ contents }} </div>
-    {%- endmacro -%}
 
-    {% macro StatBox() %}
-    <div style="width : 80%; height 20%; background-color : green;"> gay </div>
+
+    {%- macro StatBox() -%}
+    <div style="width : 80%; height: 20%; background-color : green;"> gay </div>
     {%- endmacro -%}
 
 <body>
   <div style="width:100%; height:100%" >
-
-      {{ Collum(class = 'collum' , contents = StatBox() ) }}
-      {{ Collum(class = 'collum') }}
-      {{ Collum(class = 'collum') }}
-      {{ Collum(class = 'collum') }}
-
+        <div style="width:20%; background-color:red;  height:70%; "class= ""> {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}  </div>
+        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
+        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
+        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
 </div>
 </body>
 </html>

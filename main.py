@@ -8,5 +8,3 @@ app = Flask(__name__)
 def base():
 
     return render_template("main.html.j2",)
-    
-    url_for('static', filename='main.css')
