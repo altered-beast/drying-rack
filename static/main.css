@@ -1,9 +1,26 @@
 
 
 .Column {
-  float: left;
- }
- .component {
-     float: none;
+   display: inline-block;
+   margin:-3px;
+   white-space:nowrap;
+   word-spacing:0;
 
  }
+.StatBox {
+ margin: 0 auto;
+
+ }
+ .SecondaryStatBox {
+ margin: 0 auto;
+}
+.box {
+  margin:0;
+  background:blue;
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+  text-align:center;
+}

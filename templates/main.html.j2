@@ -8,18 +8,28 @@
 </head>
 
 
-
+<!-- flex box may solve weird css issues look into it -->
+<!-- jwuery to get text from boxes https://stackoverflow.com/questions/5831413/get-textarea-text-with-javascript-or-jquery -->
+<!-- js to put it in jsob https://www.w3schools.com/js/js_json_intro.asp -->
+<!-- jquery to send it to api  https://api.jquery.com/Jquery.ajax/-->
 
     {%- macro StatBox() -%}
-    <div style="width : 80%; height: 20%; background-color : green;"> gay </div>
+    <div style="width : 80%; height: 20%; background-color : green;" class="StatBox"> <textarea contentEditable="true"> gay </textarea> </div>
+    {%- endmacro -%}
+
+    {%- macro SecondaryStatBox() -%}
+      <div style="width : 80%; height: 2.5%; background-color : yellow; " contentEditable="true" class="SecondaryStatBox"> bi </div>
     {%- endmacro -%}
 
 <body>
-  <div style="width:100%; height:100%" >
-        <div style="width:20%; background-color:red;  height:70%; "class= ""> {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}  </div>
-        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
-        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
-        <div style="width:20%; background-color:red;  height:70%; "class= "">  </div>
+  <div class="box" >
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">  {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+<!--  <div style="width:12.5%; background-color:red;  height:100%; "class= "Column"> {% for i in range(18) %} {{SecondaryStatBox()}}  {% endfor %} --->
+
+  </div>
+
 </div>
 </body>
 </html>
