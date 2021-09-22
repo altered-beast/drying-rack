@@ -3,9 +3,10 @@
 <head>
     <title>drying rack</title>
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="static/CSS/main.css" src = "{{- url_for('static', filename = 'CSS/main.css') -}}">
     <script src="{{- url_for('static', filename = 'JS/JQuery.js') -}}" charset="utf-8"></script>
-      <script src="{{- url_for('static', filename = 'JS/index.js') -}}" charset="utf-8"></script>
+    <script src="{{- url_for('static', filename = 'JS/index.js') -}}" charset="utf-8"></script>
 </head>
 
 
@@ -14,8 +15,8 @@
 <!-- js to put it in jsob https://www.w3schools.com/js/js_json_intro.asp -->
 <!-- jquery to send it to api  https://api.jquery.com/Jquery.ajax/-->
 
-    {%- macro StatBox() -%}
-    <div style="width : 80%; height: 20%; background-color : green;" class="StatBox"> <textarea contentEditable="true"> gay </textarea> </div>
+    {%- macro StatBox(id) -%}
+    <div style="width : 80%; height: 20%; background-color : green;" id="" class="StatBox"> <textarea id="{{ id }}" contentEditable="true"> 12 </textarea> </div>
     {%- endmacro -%}
 
     {%- macro SecondaryStatBox() -%}
@@ -23,14 +24,15 @@
     {%- endmacro -%}
 
 <body>
-  <div class="box" >
-    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
-    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+  <div class="box" id="box" >
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox("1")}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox("2")}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
     <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">  {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
 <!--  <div style="width:12.5%; background-color:red;  height:100%; "class= "Column"> {% for i in range(18) %} {{SecondaryStatBox()}}  {% endfor %} --->
 
   </div>
 
 </div>
+<input type="text" id="test">
 </body>
 </html>

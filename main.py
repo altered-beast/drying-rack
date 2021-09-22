@@ -1,5 +1,4 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
 import sqlalchemy as db
 import sqlite3
 
@@ -17,3 +16,4 @@ def base():
 
 
 # database part
+# https://tutorials.technology/tutorials/Using-python-SQLAlchemy-with-SQLlite3-tutorial.html
