@@ -16,7 +16,7 @@
 <!-- jquery to send it to api  https://api.jquery.com/Jquery.ajax/-->
 
     {%- macro StatBox(id) -%}
-    <div style="width : 80%; height: 20%; background-color : green;" id="" class="StatBox"> <textarea id="{{ id }}" contentEditable="true"> 12 </textarea> </div>
+    <div style="width : 80%; height: 20%; background-color : green;" id="" class="StatBox"> <textarea class="InnerStatBox" id="{{ id }}" contentEditable="true"> 12 </textarea> </div>
     {%- endmacro -%}
 
     {%- macro SecondaryStatBox() -%}
@@ -33,6 +33,5 @@
   </div>
 
 </div>
-<input type="text" id="test">
 </body>
 </html>
