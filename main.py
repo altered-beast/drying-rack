@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,jsonify, json
-# import sqlalchemy as db   this might be broken
 # import sqlite3
+import asyncio
 
 # flask part
 
@@ -20,16 +20,23 @@ def json_example():
 
     print(json)
 
-    return "Thanks!", 200
+
+    return "saved"
 
 
-@app.route("/load")
+@app.route("/load", methods=["GET"])
 def load():
-    dictionary = {'stat1':6, 'stat2':5}
+
+
+    dictionary = {'stat1':8, 'stat2':0}
     return jsonify(dictionary)
+
+
 
 
 
 
 # database part
 # https://tutorials.technology/tutorials/Using-python-SQLAlchemy-with-SQLlite3-tutorial.html
+# have each page only be accesed by link have user character page (page that lists all their characters) require unique id
+# have in eah sheet theuser who owns them
