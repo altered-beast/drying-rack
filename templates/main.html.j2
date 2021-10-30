@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <title>drying rack</title>
-
+    {# react stuff #}
+ 
+   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <!-- Load our React component. -->
+ 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="static/CSS/main.css" src = "{{- url_for('static', filename = 'CSS/main.css') -}}">
     <script src="{{- url_for('static', filename = 'JS/JQuery.js') -}}" charset="utf-8"></script>
@@ -11,24 +17,17 @@
 
 
 <!-- flex box may solve weird css issues look into it -->
-<!-- jwuery to get text from boxes https://stackoverflow.com/questions/5831413/get-textarea-text-with-javascript-or-jquery -->
-<!-- js to put it in jsob https://www.w3schools.com/js/js_json_intro.asp -->
-<!-- jquery to send it to api  https://api.jquery.com/Jquery.ajax/-->
 
     {%- macro StatBox(id) -%}
     <div style="width : 80%; height: 20%; background-color : green;" id="" class="StatBox"> <textarea class="InnerStatBox" id="{{ id }}" contentEditable="true"> 12 </textarea> </div>
     {%- endmacro -%}
 
-    {%- macro SecondaryStatBox() -%}
-      <div style="width : 80%; height: 2.5%; background-color : yellow; " contentEditable="true" class="SecondaryStatBox"> bi </div>
-    {%- endmacro -%}
 
 <body>
-  <div class="box" id="box" >
-    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox("1")}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
+  <div id="root" >
+    {# <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox("1")}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
     <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">{{StatBox("2")}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
-    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">  {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}} {{StatBox()}}</div>
-<!--  <div style="width:12.5%; background-color:red;  height:100%; "class= "Column"> {% for i in range(18) %} {{SecondaryStatBox()}}  {% endfor %} --->
+    <div style="width:12.5%; background-color:red;  height:100%; "class= "Column" contentEditable="true">   </div> #}
 
   </div>
 

@@ -1,42 +1,85 @@
 # front end
 # backend
 import asyncio
-from typing import Optional, List, Union
+from datetime import datetime
+from typing import List, Optional, Union
+import json
 
 import motor
 import motor.motor_asyncio
 from beanie import Document, Indexed, init_beanie
-from flask import Flask, json, jsonify, render_template, request
 from pydantic import BaseModel
+from quart import Quart, jsonify, request, render_template
 
-# flask part
 
-app = Flask(__name__)
+now = datetime.now()
+dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+app = Quart(__name__)
+
+
+class character(Document):
+    name: str = "new character"
+    description: Optional[str]
+    primary_stats: List[Union[str, int]] = [0, 0]
+    secondary_stats: List[Union[str, int]] = [0, 0]
+    dt_created: str = dt_string
+
+
+client = None
+database = None
+
+
+@app.before_first_request
+async def setup():
+    global client, database
+    client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://192.168.0.218:27017")
+    await init_beanie(database=client.test_database, document_models=[character])
 
 
 @app.route("/")
-def base():
+async def base():
 
-    return render_template(
+    return await render_template(
         "main.html.j2",
     )
 
 
-@app.route("/api", methods=["POST"])
-def json_example():
+@app.route("/api/init_char", methods=["GET"])
+async def init_char():
+    new_char = character()
+    await new_char.save()
+    char_id = str(new_char.id)
+    return char_id
 
-    json = request.get_json()
 
-    print(json)
+@app.route("/api/save", methods=["POST"])
+async def json_example():
+
+    web_json = await request.get_json()
+
+    working_char = character(
+        primary_stats=web_json["primarystats"],
+        secondary_stats=[21, 7],
+        name="toot too",
+        description="semen",
+        dt_created=dt_string,
+    )
+
+    await working_char.save()
 
     return "saved"
 
 
-@app.route("/load", methods=["GET"])
-def load():
+@app.route("/api/load", methods=["POST"])
+async def load():
+    print(await request.get_json())
+    web_json = await request.get_json()
+    char_id = web_json["id"]
 
-    dictionary = {"stat1": 8, "stat2": 0}
-    return jsonify(dictionary)
+    payload = await character.get(char_id)
+
+    return payload.json()
 
 
 # database part
@@ -44,76 +87,4 @@ def load():
 # have in eah sheet theuser who owns them
 
 
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-
-
-class Category(BaseModel):
-    pass
-
-
-class character(Document):
-    name: str
-    description: str
-    primarystats: List[Union[str, int, float]]
-    # make this a unioun with ints
-    secondarystats: List[Union[str, int, float]]
-
-    class collection:
-        name = "sussy"
-
-
-async def init():
-    # Crete Motor client
-    client = motor.motor_asyncio.AsyncIOMotorClient("mongodb://192.168.0.218:27017")
-
-    # Init beanie with the Product document class
-    await init_beanie(database=client.test_database, document_models=[character])
-
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(init())
-
-Cunt = character(
-    name="Cunt",
-    description="yee",
-    primarystats=["19", "5"],
-    secondarystats=["uwu", "owo"],
-)
-
-
-async def de():
-    await Cunt.save()
-
-
-loop = asyncio.get_event_loop()
-loop.run_until_complete(de())
-
-
-# # umongo motor connection
-# instance = MotorAsyncIOInstance(db)
-
-# print(instance)
-
-
-# @instance.register
-# class Sheet(Document):
-#     name = fields.StrField(required=True)
-#     primarystats = fields.StrField(required=True)
-#     secondarystats = fields.ListField()
-#     birthday = fields.DateTimeField()
-
-
-# async def death():
-#     client_data = {
-#         "name": "Cunt",
-#         "birthday": "2001-09-22T00:00:00Z",
-#         "primarystats": "19",
-#     }
-#     odwin = Sheet(**client_data)
-
-#     await odwin.commit()
-
-
-# loop = asyncio.get_event_loop()
-# loop.run_until_complete(death())
+app.run()
